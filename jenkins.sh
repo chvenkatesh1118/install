@@ -9,3 +9,4 @@ sudo yum install java-11-openjdk
 sudo yum install jenkins
 sudo systemctl daemon-reload
 sudo systemctl start jenkins
+cat /var/lib/jenkins/secrets/initialAdminPassword
