@@ -1,4 +1,4 @@
-echo Install the yum-utils package (which provides the yum-config-manager utility) and set up the stable repository.
+echo Install the yum-utils package which provides the yum-config-manager utility) and set up the stable repository.
 sudo yum install -y yum-utils
 sudo yum-config-manager \
     --add-repo \
