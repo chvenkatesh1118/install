@@ -1,38 +1,44 @@
-#Download the latest release with the command:
-#
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-#Note:
-#To download a specific version, replace the $(curl -L -s https://dl.k8s.io/release/stable.txt) portion of the command with the specific version.
-#
-#For example, to download version v1.23.0 on Linux, type:
-#
-#curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
-#Validate the binary (optional)
-#
-#Download the kubectl checksum file:
-#
-curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-#Validate the kubectl binary against the checksum file:
-#
-echo "$(<kubectl.sha256)  kubectl" | sha256sum --check
-#If valid, the output is:
-#
-#kubectl: OK
-#If the check fails, sha256 exits with nonzero status and prints output similar to:
-#
-#kubectl: FAILED
-#sha256sum: WARNING: 1 computed checksum did NOT match
-#Note: Download the same version of the binary and checksum.
-#Install kubectl
-#
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-#Note:
-#If you do not have root access on the target system, you can still install kubectl to the ~/.local/bin directory:
-#
-#chmod +x kubectl
-#mkdir -p ~/.local/bin
-#mv ./kubectl ~/.local/bin/kubectl
-## and then append (or prepend) ~/.local/bin to $PATH
-#Test to ensure the version you installed is up-to-date:
-#
-kubectl version --client
+
+yum install -y -q yum-utils device-mapper-persistent-data lvm2 > /dev/null 2>&1
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo > /dev/null 2>&1
+yum install -y -q docker-ce >/dev/null 2>&1
+
+systemctl enable docker
+systemctl start docker
+
+setenforce 0
+sed -i --follow-symlinks 's/^SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
+systemctl disable firewalld
+systemctl stop firewalld
+sed -i '/swap/d' /etc/fstab
+swapoff -a
+cat >> /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+cat >>/etc/yum.repos.d/kubernetes.repo<<EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+yum install -y kubeadm kubelet kubectl
+systemctl enable kubelet
+systemctl start kubelet
+kubeadm init --apiserver-advertise-address=<MasterServerIP> --pod-network-cidr=192.168.0.0/16
+useradd kubeadmin
+mkdir /home/kubeadmin/.kube
+cp /etc/kubernetes/admin.conf /home/kubeadmin/.kube/config
+chown -R kubeadmin:kubeadmin /home/kubeadmin/.kube
+sudo su - kubeadmin
+curl https://docs.projectcalico.org/manifests/calico-typha.yaml -o calico.yaml
+kubectl apply -f calico.yaml
+kubeadm token create --print-join-command
+kubectl get nodes
+kubectl get cs
