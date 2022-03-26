@@ -16,3 +16,8 @@ resource "aws_instance" "EC2" {
     Name = var.NAME
   }
 }
+
+
+output "privateip" {
+      value = aws_instance.EC2.private_ip
+}
