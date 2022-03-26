@@ -1,4 +1,4 @@
-variable "index" {}
+
 variable "NAME" {}
 
 provider "aws" {
@@ -10,7 +10,6 @@ resource "aws_instance" "EC2" {
   instance_type = "t2.micro"
   security_groups = ["sg-03439c9546a230549"]
   subnet_id = "subnet-0f42b250c3cf1d75c"
-  count = [count.index]
 
   tags = {
     Name = var.NAME
