@@ -1,8 +1,6 @@
-
-yum install -y -q yum-utils device-mapper-persistent-data lvm2 > /dev/null 2>&1
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo > /dev/null 2>&1
-yum install -y -q docker-ce >/dev/null 2>&1
-
+yum install -y -q yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install -y -q docker-ce
 systemctl enable docker
 systemctl start docker
 
@@ -31,14 +29,3 @@ EOF
 yum install -y kubeadm kubelet kubectl
 systemctl enable kubelet
 systemctl start kubelet
-kubeadm init --apiserver-advertise-address=<MasterServerIP> --pod-network-cidr=192.168.0.0/16
-useradd kubeadmin
-mkdir /home/kubeadmin/.kube
-cp /etc/kubernetes/admin.conf /home/kubeadmin/.kube/config
-chown -R kubeadmin:kubeadmin /home/kubeadmin/.kube
-sudo su - kubeadmin
-curl https://docs.projectcalico.org/manifests/calico-typha.yaml -o calico.yaml
-kubectl apply -f calico.yaml
-kubeadm token create --print-join-command
-kubectl get nodes
-kubectl get cs
