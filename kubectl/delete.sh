@@ -1,0 +1,1 @@
+eksctl delete cluster chanti-cluster --region ap-south-1
