@@ -1,0 +1,2 @@
+cat /etc/os
+echo
