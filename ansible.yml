@@ -1,0 +1,7 @@
+- name: installing java
+  yum:
+    name: java
+    state: present
+    became: true
+
+- name: downlaod ansible code
