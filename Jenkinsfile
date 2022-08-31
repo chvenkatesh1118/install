@@ -32,7 +32,7 @@ pipeline {
   stage(STAGE){
   steps{
 
-   yum install "${params.NAME}" -y
+   sh 'yum install "${params.NAME}" -y'
 
   }
   }
