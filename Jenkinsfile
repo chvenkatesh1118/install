@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         choice( name: 'TOOL',
-        choices: ['ansible',]
+        choices: ['ansible',],
 //                   'tarraform',
 //                   'docker',
 //                   'graffana',
