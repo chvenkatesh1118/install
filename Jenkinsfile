@@ -32,7 +32,7 @@ pipeline {
   stage(STAGE){
   steps{
    sh '''
-   bash "${params.NAME}".sh
+   echo "${params.NAME}".sh
    '''
   }
   }
