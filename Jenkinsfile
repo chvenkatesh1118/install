@@ -4,11 +4,11 @@ pipeline {
         choice(name: 'TOOL NAME',
         choices: ['ansible', 
                   'tarraform', 
-                  'docker'
-                  'graffana'
-                  'jenkins'
-                  'tomcat'
-                  'jfrog'], 
+                  'docker',
+                  'graffana',
+                  'jenkins',
+                  'tomcat',
+                  'jfrog']
                 description: 'pick which tool')
 
        }
