@@ -29,7 +29,7 @@ pipeline {
   choice(name: 'NAME', choices:['1','2'],description: 'myname' )
   }
   stages{
-  stage{
+  stage(STAGE){
   steps{
    echo "${params.NAME}"
   }
