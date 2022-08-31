@@ -8,7 +8,7 @@ pipeline {
                   'graffana',
                   'jenkins',
                   'tomcat',
-                  'jfrog']
+                  'jfrog'],
                 description: 'Pick something')
                  }
     stages {
