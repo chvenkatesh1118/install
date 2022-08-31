@@ -14,10 +14,9 @@ pipeline {
     stages {
         stage('installing') {
             steps {
-            sh
-            ---
+            sh '''
                 bash "${params.TOOL}.sh"
-            ---
+            '''
            }
         }
     }
