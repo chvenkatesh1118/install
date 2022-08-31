@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('installing') {
             steps {
-                echo "${params.TOOL}"
+                bash "${params.TOOL}.sh"
            }
         }
     }
