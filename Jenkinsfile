@@ -30,24 +30,24 @@ pipeline {
   }
   stages{
   stage('install nginx'){
+   when {
+           expression { params.NAME == 'httpd' }
+    }
 
   steps{
-      if [ ${params.NAME} -eq nginx ];
-         then
          sh 'yum install nginx -y'
   }
   }
 
    stage('install httpd'){
+     when {
+             expression { params.NAME == 'httpd' }
+      }
 
-   steps{
-   if [ ${params.NAME} -eq httpd ];
-     then
-     sh 'yum install httpd -y'
-
-   }
-   }
-}
+    steps{
+           sh 'yum install httpd -y'
+    }
+    }
 
 }
 
