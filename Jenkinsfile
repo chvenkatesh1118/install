@@ -36,7 +36,7 @@ pipeline {
   stages{
   stage('install ${params.TOOL}'){
    when {
-           expression { params.NAME == 'jenkins' }
+           expression { params.TOOL == 'jenkins' }
     }
   steps{
          sh 'bash jenkins.sh'
