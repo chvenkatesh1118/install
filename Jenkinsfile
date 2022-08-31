@@ -30,7 +30,7 @@ pipeline {
   }
   stages{
   stage('install nginx'){
-   when { anyoff {
+   when { anyof {
    expression { params.NAME == 'nginx'}
    }
    }
@@ -41,7 +41,7 @@ pipeline {
   }
 
    stage('install httpd'){
-    when { anyoff {
+    when { anyof {
     expression { params.NAME == 'httpd'}
     }
     }
