@@ -26,13 +26,13 @@ pipeline {
  agent any
   parameters {
 
-  choice(name: 'NAME', choices:['ansible','docker'],description: 'myname' )
+  choice(name: 'NAME', choices:['nginx','httpd'],description: 'myname' )
   }
   stages{
   stage(STAGE){
   steps{
 
-   echo "${params.NAME}".sh
+   yum install "${params.NAME}" -y
 
   }
   }
