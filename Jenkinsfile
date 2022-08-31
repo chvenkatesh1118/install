@@ -26,7 +26,7 @@ pipeline {
  agent any
   parameters {
 
-  choice(name: NAME, choices:['1','2'],description: 'myname' )
+  choice(name: 'NAME', choices:['1','2'],description: 'myname' )
   }
   stages{
   stage{
@@ -38,5 +38,5 @@ pipeline {
 
   }
 
-}
+
 
