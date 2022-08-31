@@ -32,7 +32,7 @@ pipeline {
   stage('install nginx'){
 
   steps{
-      if [ ${params.NAME} -eq nginx ]
+      if [ ${params.NAME} -eq nginx ];
          then
          sh 'yum install nginx -y'
   }
@@ -41,7 +41,7 @@ pipeline {
    stage('install httpd'){
 
    steps{
-   if [ ${params.NAME} -eq httpd ]
+   if [ ${params.NAME} -eq httpd ];
      then
      sh 'yum install httpd -y'
 
