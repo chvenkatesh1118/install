@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'TOOL NAME',
+        choice( name: 'TOOL NAME',
         choices: ['ansible', 
                   'tarraform', 
                   'docker',
@@ -9,9 +9,8 @@ pipeline {
                   'jenkins',
                   'tomcat',
                   'jfrog']
-                description: 'pick which tool')
-
-       }
+                description: 'Pick something')
+                 }
     stages {
         stage('installing ${params.TOOL NAME}') {
             steps {
@@ -20,3 +19,4 @@ pipeline {
         }
     }
 }
+choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
