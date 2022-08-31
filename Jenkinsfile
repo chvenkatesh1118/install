@@ -39,7 +39,7 @@ pipeline {
 
   }
   }
-  }
+
   tage(STAGE){
      when {
      params.NAME = 'httpd'
@@ -52,7 +52,7 @@ pipeline {
     }
     }
 
-  }
+
 
 
 
