@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        choice( name: 'TOOL NAME',
+        choice( name: 'TOOL',
         choices: ['ansible', 
                   'tarraform', 
                   'docker',
@@ -12,9 +12,9 @@ pipeline {
                 description: 'Pick something')
                  }
     stages {
-        stage('installing ${params.TOOL NAME}') {
+        stage('installing ${params.TOOL}') {
             steps {
-                sh 'bash ${params.TOOL NAME}.sh '
+                sh 'bash ${params.TOOL}.sh '
            }
         }
     }
