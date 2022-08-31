@@ -12,7 +12,7 @@ pipeline {
                 description: 'Pick something')
                  }
     stages {
-        stage('installing ${params.TOOL}') {
+        stage('installing') {
             steps {
                 echo ${params.TOOL}.sh
            }
