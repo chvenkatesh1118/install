@@ -9,7 +9,7 @@ pipeline {
                   'jenkins',
                   'tomcat',
                   'jfrog']
-                description: 'Pick something'))
+                description: 'Pick something')
                  }
     stages {
         stage('installing ${params.TOOL NAME}') {
@@ -19,4 +19,4 @@ pipeline {
         }
     }
 }
-choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+
