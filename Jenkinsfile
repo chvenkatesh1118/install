@@ -31,9 +31,9 @@ pipeline {
   stages{
   stage(STAGE){
   steps{
-   sh '''
+
    echo "${params.NAME}".sh
-   '''
+
   }
   }
   }
