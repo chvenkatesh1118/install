@@ -29,7 +29,7 @@ pipeline {
   choice(name: 'NAME', choices:['nginx','httpd'],description: 'myname' )
   }
   stages{
-  stage(STAGE){
+  stage('install nginx'){
    when {
    params.NAME = 'nginx'
    }
@@ -40,7 +40,7 @@ pipeline {
   }
   }
 
-  tage(STAGE){
+  stage('install httpd'){
      when {
      params.NAME = 'httpd'
      }
@@ -51,7 +51,7 @@ pipeline {
     }
     }
     }
-
+}
 
 
 
