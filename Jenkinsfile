@@ -29,7 +29,7 @@ pipeline {
   choice(name: 'TOOL',
          choices:['docker',
                   'terraform',
-                  'tomcat'
+                  'tomcat',
                   'jenkins'],
                   description: 'tool' )
   }
