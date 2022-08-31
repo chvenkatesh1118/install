@@ -31,7 +31,7 @@ pipeline {
   stages{
   stage(STAGE){
    when {
-   params.NAME 'nginx'
+   params.NAME = 'nginx'
    }
   steps{
 
@@ -42,7 +42,7 @@ pipeline {
   }
   tage(STAGE){
      when {
-     params.NAME 'httpd'
+     params.NAME = 'httpd'
      }
     steps{
 
