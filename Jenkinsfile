@@ -1,9 +1,7 @@
 pipeline {
     agent any
     parameters {
-        
-
-        choice(name: 'CHOICE', 
+        choice(name: 'TOOL NAME',
         choices: ['ansible', 
                   'tarraform', 
                   'docker'
@@ -15,9 +13,9 @@ pipeline {
 
        }
     stages {
-        stage('installing ${params.CHOICE}') {
+        stage('installing ${params.TOOL NAME}') {
             steps {
-                sh 'ansible-playbook -i server.inv ansible.yml'
+                sh 'bash ${params.TOOL NAME}.sh '
            }
         }
     }
