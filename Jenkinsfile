@@ -26,12 +26,14 @@ pipeline {
  agent any
   parameters {
 
-  choice(name: 'NAME', choices:['1','2'],description: 'myname' )
+  choice(name: 'NAME', choices:['ansible','docker'],description: 'myname' )
   }
   stages{
   stage(STAGE){
   steps{
-   echo "${params.NAME}"
+   sh '''
+   bash "${params.NAME}".sh
+   '''
   }
   }
   }
