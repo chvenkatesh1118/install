@@ -26,28 +26,24 @@ pipeline {
  agent any
   parameters {
 
-  choice(name: 'NAME', choices:['nginx','httpd'],description: 'myname' )
+  choice(name: 'TOOL',
+         choices:['docker',
+                  'terraform',
+                  'tomcat'
+                  'jenkins'],
+                  description: 'tool' )
   }
   stages{
-  stage('install nginx'){
+  stage('install ${params.TOOL}'){
    when {
-           expression { params.NAME == 'httpd' }
+           expression { params.NAME == 'jenkins' }
     }
-
   steps{
-         sh 'yum install nginx -y'
+         sh 'bash jenkins.sh'
   }
   }
 
-   stage('install httpd'){
-     when {
-             expression { params.NAME == 'httpd' }
-      }
 
-    steps{
-           sh 'yum install httpd -y'
-    }
-    }
 
 }
 }
